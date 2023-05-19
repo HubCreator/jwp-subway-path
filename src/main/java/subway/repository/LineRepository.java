@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import subway.dao.LineDao;
 import subway.dao.SectionDao;
 import subway.domain.line.Line;
+import subway.domain.section.Section;
 import subway.domain.section.Sections;
 import subway.exception.LineNotFoundException;
 
@@ -38,7 +39,8 @@ public class LineRepository {
     public Optional<Line> findLineWithSectionsByLineId(final Long lineId) {
         final Line findLine = lineDao.findById(lineId)
                 .orElseThrow(() -> new LineNotFoundException(lineId));
-        final Sections sections = new Sections(sectionDao.findAllByLineId(findLine.getId()));
+        final List<Section> findSections = sectionDao.findAllByLineId(findLine.getId());
+        final Sections sections = new Sections(findSections);
 
         return Optional.of(new Line(findLine.getId(), findLine.getName(), sections));
     }

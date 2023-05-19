@@ -9,7 +9,8 @@ public class AddStationToLineRequest {
     private final Direction direction;
     private final Integer distance;
 
-    public AddStationToLineRequest(final Long existStationId, final String newStationName, final Direction direction, final Integer distance) {
+    public AddStationToLineRequest(final Long existStationId, final String newStationName,
+                                   final Direction direction, final Integer distance) {
         this.existStationId = existStationId;
         this.newStationName = newStationName;
         this.direction = direction;

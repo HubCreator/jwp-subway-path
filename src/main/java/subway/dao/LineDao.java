@@ -35,6 +35,7 @@ public class LineDao {
         final SqlParameterSource params = new MapSqlParameterSource()
                 .addValue("name", lineName);
         final Long id = jdbcInsert.executeAndReturnKey(params).longValue();
+
         return new Line(id, lineName);
     }
 
@@ -58,6 +59,7 @@ public class LineDao {
 
     public List<Line> findAll() {
         final String sql = "SELECT l.id, l.name FROM line l ORDER BY l.id";
+
         return jdbcTemplate.query(sql, lineRowMapper);
     }
 }

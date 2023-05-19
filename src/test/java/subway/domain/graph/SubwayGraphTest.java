@@ -134,6 +134,20 @@ class SubwayGraphTest {
             assertThat(stations).containsExactly(E, D, C, B);
             assertThat(pathFare).isEqualTo(1250);
         }
+
+        @DisplayName("E에서 E로 간다.")
+        @Test
+        void getShortestPath7() {
+            // when
+            final double pathWeight = graph.getShortestPathDistance(E, E);
+            final List<Station> stations = graph.getShortestPath(E, E);
+            final int pathFare = graph.getPathFare(E, E);
+
+            // then
+            assertThat(pathWeight).isEqualTo(0);
+            assertThat(stations).containsExactly(E);
+            assertThat(pathFare).isEqualTo(1250);
+        }
     }
 
     @Nested
