@@ -1,10 +1,6 @@
 package subway.ui.line.dto;
 
-import subway.domain.line.Line;
-import subway.domain.station.Station;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GetAllStationsInLineResponse {
 
@@ -12,12 +8,10 @@ public class GetAllStationsInLineResponse {
     private final String lineName;
     private final List<StationDto> stations;
 
-    public GetAllStationsInLineResponse(final Line line, final List<Station> stations) {
-        this.lineId = line.getId();
-        this.lineName = line.getName();
-        this.stations = stations.stream()
-                .map(station -> new StationDto(station.getId(), station.getName()))
-                .collect(Collectors.toList());
+    public GetAllStationsInLineResponse(final Long lineId, final String lineName, final List<StationDto> stationDtos) {
+        this.lineId = lineId;
+        this.lineName = lineName;
+        this.stations = stationDtos;
     }
 
     public Long getLineId() {

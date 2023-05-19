@@ -15,6 +15,10 @@ public class Sections {
 
     private final LinkedList<Section> sections;
 
+    public Sections(final Section section) {
+        this.sections = new LinkedList<>(List.of(section));
+    }
+
     public Sections(final List<Section> sections) {
         this.sections = new LinkedList<>(sections);
     }

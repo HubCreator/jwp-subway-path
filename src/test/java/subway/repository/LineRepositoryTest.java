@@ -51,7 +51,7 @@ class LineRepositoryTest {
         );
 
         final Line line = new Line("1호선", sections);
-        savedLine = lineRepository.saveWithSections(line);
+        savedLine = lineRepository.save(line);
     }
 
     @DisplayName("Sections를 포함한 Line을 저장할 수 있다.")
@@ -93,7 +93,7 @@ class LineRepositoryTest {
         );
 
         final Line line = new Line("2호선", sections);
-        savedLine = lineRepository.saveWithSections(line);
+        savedLine = lineRepository.save(line);
 
         // when
         final List<Line> lines = lineRepository.findAllWithSections();

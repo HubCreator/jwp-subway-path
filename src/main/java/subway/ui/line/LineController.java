@@ -15,9 +15,11 @@ import subway.ui.line.dto.AddStationToLineRequest;
 import subway.ui.line.dto.GetAllStationsInLineResponse;
 import subway.ui.line.dto.GetAllStationsInLineResponses;
 import subway.ui.line.dto.LineCreateRequest;
+import subway.ui.line.dto.StationDto;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/lines")
@@ -48,7 +50,11 @@ public class LineController {
     public ResponseEntity<GetAllStationsInLineResponse> findLineById(@PathVariable Long lineId) {
         final Line line = lineService.findLineById(lineId);
         final List<Station> stations = lineService.getStations(lineId);
-        final GetAllStationsInLineResponse response = new GetAllStationsInLineResponse(line, stations);
+
+        final List<StationDto> stationDtos = stations.stream()
+                .map(station -> new StationDto(station.getId(), station.getName()))
+                .collect(Collectors.toList());
+        final GetAllStationsInLineResponse response = new GetAllStationsInLineResponse(line.getId(), line.getName(), stationDtos);
 
         return ResponseEntity.ok(response);
     }

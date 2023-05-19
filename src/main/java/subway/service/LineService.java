@@ -42,7 +42,7 @@ public class LineService {
         }
         final Section section = new Section(upStation, downStation, new Distance(request.getDistance()));
 
-        return lineRepository.saveWithSections(new Line(line.getName(), new Sections(List.of(section))));
+        return lineRepository.save(new Line(line.getName(), new Sections(section)));
     }
 
     @Transactional

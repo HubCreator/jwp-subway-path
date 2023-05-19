@@ -24,11 +24,12 @@ public class LineRepository {
         this.sectionDao = sectionDao;
     }
 
-    public Line saveWithSections(final Line line) {
+    public Line save(final Line line) {
         final Line insertedLine = lineDao.insert(line.getName());
         sectionDao.insertAllByLineId(insertedLine.getId(), line.sections());
 
-        return findLineWithSectionsByLineId(insertedLine.getId()).get();
+        return findLineWithSectionsByLineId(insertedLine.getId())
+                .orElseThrow(() -> new LineNotFoundException(insertedLine.getId()));
     }
 
     public Optional<Line> findLineByName(final Line line) {
