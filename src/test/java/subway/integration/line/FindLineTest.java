@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 public class FindLineTest extends IntegrationTestSetUp {
 
     private final LineCreateRequest createRequest =
-            new LineCreateRequest("3호선", "A", "B", 10);
+            new LineCreateRequest("3호선", "A", "B", 10, 0);
 
     @DisplayName("3호선에 A-B-C 역이 있을 때 - ")
     @BeforeEach
@@ -62,7 +62,7 @@ public class FindLineTest extends IntegrationTestSetUp {
     void findAllLines() {
 
         final LineCreateRequest createRequest =
-                new LineCreateRequest("1호선", "X", "Y", 10);
+                new LineCreateRequest("1호선", "X", "Y", 10, 0);
 
         // given, when
         RestAssured.given().log().all()

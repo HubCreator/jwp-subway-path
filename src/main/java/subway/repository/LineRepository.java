@@ -25,7 +25,7 @@ public class LineRepository {
     }
 
     public Line save(final Line line) {
-        final Line insertedLine = lineDao.insert(line.getName());
+        final Line insertedLine = lineDao.insert(line.getName(), line.getExtraFare());
         sectionDao.insertAllByLineId(insertedLine.getId(), line.sections());
 
         return findLineWithSectionsByLineId(insertedLine.getId())

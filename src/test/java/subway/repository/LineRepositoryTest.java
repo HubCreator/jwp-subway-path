@@ -50,7 +50,7 @@ class LineRepositoryTest {
                 )
         );
 
-        final Line line = new Line("1호선", sections);
+        final Line line = new Line("1호선", sections, 0);
         savedLine = lineRepository.save(line);
     }
 
@@ -92,7 +92,7 @@ class LineRepositoryTest {
                 )
         );
 
-        final Line line = new Line("2호선", sections);
+        final Line line = new Line("2호선", sections, 0);
         savedLine = lineRepository.save(line);
 
         // when

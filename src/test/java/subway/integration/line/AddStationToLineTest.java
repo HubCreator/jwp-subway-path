@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class AddStationToLineTest extends IntegrationTestSetUp {
 
     private final LineCreateRequest createRequest =
-            new LineCreateRequest("3호선", "A", "B", 10);
+            new LineCreateRequest("3호선", "A", "B", 10, 0);
 
     @DisplayName("3호선에 A-B 역이 있을 때 - ")
     @BeforeEach

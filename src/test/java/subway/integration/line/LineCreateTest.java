@@ -12,7 +12,7 @@ import subway.ui.line.dto.LineCreateRequest;
 public class LineCreateTest extends IntegrationTestSetUp {
 
     private final LineCreateRequest createRequest =
-            new LineCreateRequest("3호선", "A", "B", 10);
+            new LineCreateRequest("3호선", "A", "B", 10, 0);
 
     @BeforeEach
     public void init() {

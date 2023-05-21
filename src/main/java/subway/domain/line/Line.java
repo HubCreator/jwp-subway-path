@@ -13,23 +13,27 @@ public class Line {
 
     private Long id;
     private String name;
+    private Integer extraFare;
     private Sections sections;
 
     private Line() {
     }
 
-    public Line(final String name) {
+    public Line(final String name, final Integer extraFare) {
         this.name = name;
+        this.extraFare = extraFare;
     }
 
-    public Line(final String name, final Sections sections) {
+    public Line(final String name, final Sections sections, final Integer extraFare) {
         this.name = name;
         this.sections = sections;
+        this.extraFare = extraFare;
     }
 
-    public Line(final Long id, final String name) {
+    public Line(final Long id, final String name, final Integer extraFare) {
         this.id = id;
         this.name = name;
+        this.extraFare = extraFare;
     }
 
     public Line(final Long id, final String name, final Sections sections) {
@@ -56,6 +60,10 @@ public class Line {
 
     public Sections getSections() {
         return sections;
+    }
+
+    public Integer getExtraFare() {
+        return extraFare;
     }
 
     public List<Section> sections() {

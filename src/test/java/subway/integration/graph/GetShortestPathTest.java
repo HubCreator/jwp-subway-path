@@ -16,9 +16,9 @@ import static org.hamcrest.Matchers.equalTo;
 public class GetShortestPathTest extends IntegrationTestSetUp {
 
     private final LineCreateRequest createRequest1 =
-            new LineCreateRequest("3호선", "A", "B", 9);
+            new LineCreateRequest("3호선", "A", "B", 9, 0);
     private final LineCreateRequest createRequest2 =
-            new LineCreateRequest("2호선", "A", "B", 10);
+            new LineCreateRequest("2호선", "A", "B", 10, 0);
 
     @DisplayName("지하철 노선을 생성후 역을 추가한다. 3호선 : A-B-C")
     @BeforeEach

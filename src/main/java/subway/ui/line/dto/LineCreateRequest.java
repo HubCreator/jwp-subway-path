@@ -6,12 +6,15 @@ public class LineCreateRequest {
     private final String upStation;
     private final String downStation;
     private final Integer distance;
+    private final Integer extraFare;
 
-    public LineCreateRequest(final String lineName, final String upStation, final String downStation, final Integer distance) {
+    public LineCreateRequest(final String lineName, final String upStation, final String downStation,
+                             final Integer distance, final Integer extraFare) {
         this.lineName = lineName;
         this.upStation = upStation;
         this.downStation = downStation;
         this.distance = distance;
+        this.extraFare = extraFare;
     }
 
     public String getLineName() {
@@ -28,5 +31,9 @@ public class LineCreateRequest {
 
     public Integer getDistance() {
         return distance;
+    }
+
+    public Integer getExtraFare() {
+        return extraFare;
     }
 }

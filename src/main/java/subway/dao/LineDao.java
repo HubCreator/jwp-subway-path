@@ -28,19 +28,22 @@ public class LineDao {
 
     final RowMapper<Line> lineRowMapper = (result, count) ->
             new Line(result.getLong("id"),
-                    result.getString("name")
+                    result.getString("name"),
+                    result.getInt("extra_fare")
             );
 
-    public Line insert(final String lineName) {
+
+    public Line insert(final String lineName, final Integer extraFare) {
         final SqlParameterSource params = new MapSqlParameterSource()
-                .addValue("name", lineName);
+                .addValue("name", lineName)
+                .addValue("extra_fare", extraFare);
         final Long id = jdbcInsert.executeAndReturnKey(params).longValue();
 
-        return new Line(id, lineName);
+        return new Line(id, lineName, extraFare);
     }
 
     public Optional<Line> findById(final Long lineId) {
-        final String sql = "SELECT l.id, l.name FROM line l WHERE l.id = ?";
+        final String sql = "SELECT l.id, l.name, l.extra_fare FROM line l WHERE l.id = ?";
         try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(sql, lineRowMapper, lineId));
         } catch (final EmptyResultDataAccessException e) {
@@ -49,7 +52,7 @@ public class LineDao {
     }
 
     public Optional<Line> findByName(final String lineName) {
-        final String sql = "SELECT l.id, l.name FROM line l WHERE l.name = ?";
+        final String sql = "SELECT l.id, l.name, l.extra_fare FROM line l WHERE l.name = ?";
         try {
             return Optional.ofNullable(jdbcTemplate.queryForObject(sql, lineRowMapper, lineName));
         } catch (final EmptyResultDataAccessException e) {
@@ -58,7 +61,7 @@ public class LineDao {
     }
 
     public List<Line> findAll() {
-        final String sql = "SELECT l.id, l.name FROM line l ORDER BY l.id";
+        final String sql = "SELECT l.id, l.name, l.extra_fare FROM line l ORDER BY l.id";
 
         return jdbcTemplate.query(sql, lineRowMapper);
     }

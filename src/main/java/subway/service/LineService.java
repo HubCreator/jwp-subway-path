@@ -36,13 +36,13 @@ public class LineService {
     public Line createNewLine(final LineCreateRequest request) {
         final Station upStation = stationRepository.save(new Station(request.getUpStation()));
         final Station downStation = stationRepository.save(new Station(request.getDownStation()));
-        final Line line = new Line(request.getLineName());
+        final Line line = new Line(request.getLineName(), request.getExtraFare());
         if (lineRepository.findLineByName(line).isPresent()) {
             throw new LineAlreadyExistException(request.getLineName());
         }
         final Section section = new Section(upStation, downStation, new Distance(request.getDistance()));
 
-        return lineRepository.save(new Line(line.getName(), new Sections(section)));
+        return lineRepository.save(new Line(line.getName(), new Sections(section), line.getExtraFare()));
     }
 
     @Transactional
