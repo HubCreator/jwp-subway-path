@@ -12,33 +12,33 @@ import java.util.Objects;
 public class Line {
 
     private Long id;
-    private String name;
-    private Integer extraFare;
+    private LineName lineName;
+    private ExtraFare extraFare;
     private Sections sections;
 
     private Line() {
     }
 
-    public Line(final String name, final Integer extraFare) {
-        this.name = name;
-        this.extraFare = extraFare;
+    public Line(final String lineName, final Integer extraFare) {
+        this.lineName = new LineName(lineName);
+        this.extraFare = new ExtraFare(extraFare);
     }
 
-    public Line(final String name, final Sections sections, final Integer extraFare) {
-        this.name = name;
+    public Line(final String lineName, final Sections sections, final Integer extraFare) {
+        this.lineName = new LineName(lineName);
         this.sections = sections;
-        this.extraFare = extraFare;
+        this.extraFare = new ExtraFare(extraFare);
     }
 
-    public Line(final Long id, final String name, final Integer extraFare) {
+    public Line(final Long id, final String lineName, final Integer extraFare) {
         this.id = id;
-        this.name = name;
-        this.extraFare = extraFare;
+        this.lineName = new LineName(lineName);
+        this.extraFare = new ExtraFare(extraFare);
     }
 
-    public Line(final Long id, final String name, final Sections sections) {
+    public Line(final Long id, final String lineName, final Sections sections) {
         this.id = id;
-        this.name = name;
+        this.lineName = new LineName(lineName);
         this.sections = sections;
     }
 
@@ -54,16 +54,24 @@ public class Line {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public LineName getLineName() {
+        return lineName;
+    }
+
+    public String getLineNameValue() {
+        return lineName.getLineName();
     }
 
     public Sections getSections() {
         return sections;
     }
 
-    public Integer getExtraFare() {
+    public ExtraFare getExtraFare() {
         return extraFare;
+    }
+
+    public int getExtraFareValue() {
+        return extraFare.getExtraFare();
     }
 
     public List<Section> sections() {
@@ -95,7 +103,7 @@ public class Line {
     public String toString() {
         return "Line{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + lineName + '\'' +
                 ", sections=" + sections +
                 '}';
     }

@@ -60,7 +60,7 @@ class LineRepositoryTest {
         // when, then
         assertAll(
                 () -> assertThat(savedLine.getId()).isNotNull(),
-                () -> assertThat(savedLine.getName()).isEqualTo("1호선"),
+                () -> assertThat(savedLine.getLineNameValue()).isEqualTo("1호선"),
                 () -> assertThat(savedLine.sections()).hasSize(3)
         );
     }
@@ -75,7 +75,7 @@ class LineRepositoryTest {
         // then
         assertAll(
                 () -> assertThat(line.getId()).isNotNull(),
-                () -> assertThat(line.getName()).isEqualTo("1호선"),
+                () -> assertThat(line.getLineNameValue()).isEqualTo("1호선"),
                 () -> assertThat(line.sections()).hasSize(3)
         );
     }
@@ -102,10 +102,10 @@ class LineRepositoryTest {
         assertAll(
                 () -> assertThat(lines).hasSize(2),
                 () -> assertThat(lines.get(0).getId()).isNotNull(),
-                () -> assertThat(lines.get(0).getName()).isEqualTo("1호선"),
+                () -> assertThat(lines.get(0).getLineNameValue()).isEqualTo("1호선"),
                 () -> assertThat(lines.get(0).sections()).hasSize(3),
                 () -> assertThat(lines.get(1).getId()).isNotNull(),
-                () -> assertThat(lines.get(1).getName()).isEqualTo("2호선"),
+                () -> assertThat(lines.get(1).getLineNameValue()).isEqualTo("2호선"),
                 () -> assertThat(lines.get(1).sections()).hasSize(3)
         );
     }

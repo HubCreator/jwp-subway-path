@@ -25,7 +25,7 @@ public class LineRepository {
     }
 
     public Line save(final Line line) {
-        final Line insertedLine = lineDao.insert(line.getName(), line.getExtraFare());
+        final Line insertedLine = lineDao.insert(line.getLineNameValue(), line.getExtraFareValue());
         sectionDao.insertAllByLineId(insertedLine.getId(), line.sections());
 
         return findLineWithSectionsByLineId(insertedLine.getId())
@@ -34,7 +34,7 @@ public class LineRepository {
 
     public Optional<Line> findLineByName(final Line line) {
 
-        return lineDao.findByName(line.getName());
+        return lineDao.findByName(line.getLineNameValue());
     }
 
     public Optional<Line> findLineWithSectionsByLineId(final Long lineId) {
@@ -43,7 +43,7 @@ public class LineRepository {
         final List<Section> findSections = sectionDao.findAllByLineId(findLine.getId());
         final Sections sections = new Sections(findSections);
 
-        return Optional.of(new Line(findLine.getId(), findLine.getName(), sections));
+        return Optional.of(new Line(findLine.getId(), findLine.getLineNameValue(), sections));
     }
 
     public Optional<Line> findById(final Long lineId) {
@@ -56,7 +56,7 @@ public class LineRepository {
 
         return allLine.stream()
                 .map(line -> new Line(
-                        line.getId(), line.getName(),
+                        line.getId(), line.getLineNameValue(),
                         new Sections(new LinkedList<>(sectionDao.findAllByLineId(line.getId())))))
                 .collect(Collectors.toList());
     }
