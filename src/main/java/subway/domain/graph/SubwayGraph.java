@@ -3,7 +3,6 @@ package subway.domain.graph;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultWeightedEdge;
 import org.jgrapht.graph.WeightedMultigraph;
-import subway.domain.fare.FarePolicy;
 import subway.domain.line.Line;
 import subway.domain.station.Station;
 
@@ -12,14 +11,12 @@ import java.util.List;
 public class SubwayGraph {
 
     private final DijkstraShortestPath<Station, DefaultWeightedEdge> graph;
-    private final FarePolicy farePolicy;
 
-    public SubwayGraph(final DijkstraShortestPath<Station, DefaultWeightedEdge> graph, final FarePolicy farePolicy) {
+    public SubwayGraph(final DijkstraShortestPath<Station, DefaultWeightedEdge> graph) {
         this.graph = graph;
-        this.farePolicy = farePolicy;
     }
 
-    public static SubwayGraph of(final List<Line> lines, final FarePolicy farePolicy) {
+    public static SubwayGraph of(final List<Line> lines) {
         final WeightedMultigraph<Station, DefaultWeightedEdge> graph = new WeightedMultigraph<>(DefaultWeightedEdge.class);
         for (final Line line : lines) {
             line.stations().forEach(station -> {
@@ -34,7 +31,7 @@ public class SubwayGraph {
                     });
         }
 
-        return new SubwayGraph(new DijkstraShortestPath<>(graph), farePolicy);
+        return new SubwayGraph(new DijkstraShortestPath<>(graph));
     }
 
     public int getShortestPathDistance(final Station fromStation, final Station toStation) {
@@ -45,11 +42,5 @@ public class SubwayGraph {
     public List<Station> getShortestPath(final Station fromStation, final Station toStation) {
 
         return graph.getPath(fromStation, toStation).getVertexList();
-    }
-
-    public int getPathFare(final Station fromStation, final Station toStation) {
-        final int pathDistance = getShortestPathDistance(fromStation, toStation);
-
-        return farePolicy.calculateFare(pathDistance);
     }
 }

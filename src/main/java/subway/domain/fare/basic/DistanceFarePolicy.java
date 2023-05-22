@@ -1,6 +1,10 @@
-package subway.domain.fare;
+package subway.domain.fare.basic;
 
-public class DistanceFarePolicy implements FarePolicy {
+import subway.domain.line.Line;
+
+import java.util.List;
+
+public class DistanceFarePolicy implements BasicFarePolicy {
 
     private static final int BASIC_FARE = 1250;
     private static final int BASIC_DISTANCE = 10;
@@ -13,8 +17,20 @@ public class DistanceFarePolicy implements FarePolicy {
 
     private static final int UNIT = 100;
 
+    private final int distance;
+    private final int extraFare;
+
+
+    public DistanceFarePolicy(final int distance, final List<Line> lines) {
+        this.distance = distance;
+        this.extraFare = lines.stream()
+                .mapToInt(Line::getExtraFareValue)
+                .max()
+                .getAsInt();
+    }
+
     @Override
-    public int calculateFare(final int distance) {
+    public int calculateFare() {
         if (distance <= BASIC_DISTANCE) {
             return BASIC_FARE;
         }

@@ -2,8 +2,9 @@ package subway.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import subway.domain.fare.DistanceFarePolicy;
+import subway.domain.fare.basic.DistanceFarePolicy;
 import subway.domain.graph.SubwayGraph;
+import subway.domain.line.Fare;
 import subway.domain.line.Line;
 import subway.domain.station.Station;
 import subway.exception.StationNotFoundException;
@@ -33,11 +34,12 @@ public class PathService {
 
         final List<Line> lines = lineRepository.findAllWithSections();
 
-        final SubwayGraph subwayGraph = SubwayGraph.of(lines, new DistanceFarePolicy());
+        final SubwayGraph subwayGraph = SubwayGraph.of(lines);
         final int distance = subwayGraph.getShortestPathDistance(fromStation, toStation);
         final List<Station> stations = subwayGraph.getShortestPath(fromStation, toStation);
-        final int fare = subwayGraph.getPathFare(fromStation, toStation);
 
-        return new ShortestPathResponse(distance, stations, fare);
+        final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+
+        return new ShortestPathResponse(distance, stations, fare.getFare());
     }
 }

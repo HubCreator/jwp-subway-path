@@ -3,7 +3,8 @@ package subway.domain.graph;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import subway.domain.fare.DistanceFarePolicy;
+import subway.domain.fare.basic.DistanceFarePolicy;
+import subway.domain.line.Fare;
 import subway.domain.line.Line;
 import subway.domain.section.Distance;
 import subway.domain.section.Section;
@@ -49,104 +50,104 @@ class SubwayGraphTest {
                 ))
         );
 
-        final SubwayGraph graph = SubwayGraph.of(lines, new DistanceFarePolicy());
+        final SubwayGraph graph = SubwayGraph.of(lines);
 
         @DisplayName("A에서 H로 간다.")
         @Test
         void getShortestPath1() {
             // when
-            final double pathWeight = graph.getShortestPathDistance(A, H);
+            final int distance = graph.getShortestPathDistance(A, H);
             final List<Station> stations = graph.getShortestPath(A, H);
-            final int pathFare = graph.getPathFare(A, H);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
-            assertThat(pathWeight).isEqualTo(12);
+            assertThat(distance).isEqualTo(12);
             assertThat(stations).containsExactly(A, B, C, D, H);
-            assertThat(pathFare).isEqualTo(1350);
+            assertThat(fare).isEqualTo(new Fare(1350));
         }
 
         @DisplayName("B에서 D로 간다.")
         @Test
         void getShortestPath2() {
             // when
-            final double pathWeight = graph.getShortestPathDistance(B, D);
+            final int distance = graph.getShortestPathDistance(B, D);
             final List<Station> stations = graph.getShortestPath(B, D);
-            final int pathFare = graph.getPathFare(B, D);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
-            assertThat(pathWeight).isEqualTo(4);
+            assertThat(distance).isEqualTo(4);
             assertThat(stations).containsExactly(B, C, D);
-            assertThat(pathFare).isEqualTo(1250);
+            assertThat(fare).isEqualTo(new Fare(1250));
         }
 
         @DisplayName("B에서 E로 간다.")
         @Test
         void getShortestPath3() {
             // when
-            final double pathWeight = graph.getShortestPathDistance(B, E);
+            final int distance = graph.getShortestPathDistance(B, E);
             final List<Station> stations = graph.getShortestPath(B, E);
-            final int pathFare = graph.getPathFare(B, E);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
-            assertThat(pathWeight).isEqualTo(9);
+            assertThat(distance).isEqualTo(9);
             assertThat(stations).containsExactly(B, C, D, E);
-            assertThat(pathFare).isEqualTo(1250);
+            assertThat(fare).isEqualTo(new Fare(1250));
         }
 
         @DisplayName("C에서 D로 간다.")
         @Test
         void getShortestPath4() {
             // when
-            final double pathWeight = graph.getShortestPathDistance(C, D);
+            final int distance = graph.getShortestPathDistance(C, D);
             final List<Station> stations = graph.getShortestPath(C, D);
-            final int pathFare = graph.getPathFare(C, D);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
-            assertThat(pathWeight).isEqualTo(1);
+            assertThat(distance).isEqualTo(1);
             assertThat(stations).containsExactly(C, D);
-            assertThat(pathFare).isEqualTo(1250);
+            assertThat(fare).isEqualTo(new Fare(1250));
         }
 
         @DisplayName("H에서 A로 간다.")
         @Test
         void getShortestPath5() {
             // when
-            final double pathWeight = graph.getShortestPathDistance(H, A);
+            final int distance = graph.getShortestPathDistance(H, A);
             final List<Station> stations = graph.getShortestPath(H, A);
-            final int pathFare = graph.getPathFare(H, A);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
-            assertThat(pathWeight).isEqualTo(12);
+            assertThat(distance).isEqualTo(12);
             assertThat(stations).containsExactly(H, D, C, B, A);
-            assertThat(pathFare).isEqualTo(1350);
+            assertThat(fare).isEqualTo(new Fare(1350));
         }
 
         @DisplayName("E에서 B로 간다.")
         @Test
         void getShortestPath6() {
             // when
-            final double pathWeight = graph.getShortestPathDistance(E, B);
+            final int distance = graph.getShortestPathDistance(E, B);
             final List<Station> stations = graph.getShortestPath(E, B);
-            final int pathFare = graph.getPathFare(E, B);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
-            assertThat(pathWeight).isEqualTo(9);
+            assertThat(distance).isEqualTo(9);
             assertThat(stations).containsExactly(E, D, C, B);
-            assertThat(pathFare).isEqualTo(1250);
+            assertThat(fare).isEqualTo(new Fare(1250));
         }
 
         @DisplayName("E에서 E로 간다.")
         @Test
         void getShortestPath7() {
             // when
-            final double pathWeight = graph.getShortestPathDistance(E, E);
+            final int distance = graph.getShortestPathDistance(E, E);
             final List<Station> stations = graph.getShortestPath(E, E);
-            final int pathFare = graph.getPathFare(E, E);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
-            assertThat(pathWeight).isEqualTo(0);
+            assertThat(distance).isEqualTo(0);
             assertThat(stations).containsExactly(E);
-            assertThat(pathFare).isEqualTo(1250);
+            assertThat(fare).isEqualTo(new Fare(1250));
         }
     }
 
@@ -172,17 +173,17 @@ class SubwayGraphTest {
                 ))
         );
 
-        final SubwayGraph graph = SubwayGraph.of(lines, new DistanceFarePolicy());
+        final SubwayGraph graph = SubwayGraph.of(lines);
 
         @Test
         void fare1() {
             // when
-            final double distance = graph.getShortestPathDistance(A, H);
-            final int pathFare = graph.getPathFare(A, H);
+            final int distance = graph.getShortestPathDistance(A, H);
+            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(72);
-            assertThat(pathFare).isEqualTo(2250);
+            assertThat(fare).isEqualTo(new Fare(2250));
         }
 
         @Test
