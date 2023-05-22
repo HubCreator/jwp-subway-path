@@ -3,6 +3,7 @@ package subway.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import subway.domain.fare.basic.DistanceFarePolicy;
+import subway.domain.fare.discount.AgeGroupDiscountPolicy;
 import subway.domain.graph.SubwayGraph;
 import subway.domain.line.Fare;
 import subway.domain.line.Line;
@@ -26,7 +27,7 @@ public class PathService {
         this.stationRepository = stationRepository;
     }
 
-    public ShortestPathResponse getShortestPath(final Long fromId, final Long toId) {
+    public ShortestPathResponse getShortestPath(final Long fromId, final Long toId, final Integer age) {
         final Station fromStation = stationRepository.findById(fromId)
                 .orElseThrow(() -> new StationNotFoundException(fromId));
         final Station toStation = stationRepository.findById(toId)
@@ -34,11 +35,12 @@ public class PathService {
 
         final List<Line> lines = lineRepository.findAllWithSections();
 
-        final SubwayGraph subwayGraph = SubwayGraph.of(lines);
+        final SubwayGraph subwayGraph = SubwayGraph.from(lines);
         final int distance = subwayGraph.getShortestPathDistance(fromStation, toStation);
         final List<Station> stations = subwayGraph.getShortestPath(fromStation, toStation);
 
-        final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+        final Fare fare = new Fare(new DistanceFarePolicy(distance, lines))
+                .applyDiscount(new AgeGroupDiscountPolicy(age));
 
         return new ShortestPathResponse(distance, stations, fare.getFare());
     }

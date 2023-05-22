@@ -20,8 +20,9 @@ public class PathController {
 
     @GetMapping("/shortest")
     public ResponseEntity<ShortestPathResponse> getShortestPath(@RequestParam Long fromId,
-                                                                @RequestParam Long toId) {
-        final ShortestPathResponse response = pathService.getShortestPath(fromId, toId);
+                                                                @RequestParam Long toId,
+                                                                @RequestParam Integer age) {
+        final ShortestPathResponse response = pathService.getShortestPath(fromId, toId, age);
 
         return ResponseEntity.ok(response);
     }

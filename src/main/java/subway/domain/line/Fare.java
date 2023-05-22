@@ -1,6 +1,7 @@
 package subway.domain.line;
 
 import subway.domain.fare.basic.BasicFarePolicy;
+import subway.domain.fare.discount.DiscountPolicy;
 
 import java.util.Objects;
 
@@ -14,6 +15,11 @@ public class Fare {
 
     public Fare(final int fare) {
         this.fare = fare;
+    }
+
+    public Fare applyDiscount(final DiscountPolicy discountPolicy) {
+
+        return discountPolicy.calculateDiscount(fare);
     }
 
     public int getFare() {

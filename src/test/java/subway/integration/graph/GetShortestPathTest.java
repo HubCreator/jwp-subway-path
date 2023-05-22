@@ -91,7 +91,7 @@ public class GetShortestPathTest extends IntegrationTestSetUp {
     void test() {
         RestAssured.given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .when().get("/path/shortest?fromId=1&toId=4")
+                .when().get("/path/shortest?fromId=1&toId=4&age=20")
                 .then().log().all()
                 .statusCode(HttpStatus.OK.value())
                 .body("totalDistance", equalTo(24))

@@ -16,7 +16,7 @@ public class SubwayGraph {
         this.graph = graph;
     }
 
-    public static SubwayGraph of(final List<Line> lines) {
+    public static SubwayGraph from(final List<Line> lines) {
         final WeightedMultigraph<Station, DefaultWeightedEdge> graph = new WeightedMultigraph<>(DefaultWeightedEdge.class);
         for (final Line line : lines) {
             line.stations().forEach(station -> {

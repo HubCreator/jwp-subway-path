@@ -50,7 +50,7 @@ class SubwayGraphTest {
                 ))
         );
 
-        final SubwayGraph graph = SubwayGraph.of(lines);
+        final SubwayGraph graph = SubwayGraph.from(lines);
 
         @DisplayName("A에서 H로 간다.")
         @Test
@@ -173,7 +173,7 @@ class SubwayGraphTest {
                 ))
         );
 
-        final SubwayGraph graph = SubwayGraph.of(lines);
+        final SubwayGraph graph = SubwayGraph.from(lines);
 
         @Test
         void fare1() {
@@ -183,7 +183,7 @@ class SubwayGraphTest {
 
             // then
             assertThat(distance).isEqualTo(72);
-            assertThat(fare).isEqualTo(new Fare(2250));
+            assertThat(fare).isEqualTo(new Fare(2350));
         }
 
         @Test

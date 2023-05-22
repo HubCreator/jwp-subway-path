@@ -47,6 +47,6 @@ public class DistanceFarePolicy implements BasicFarePolicy {
 
     private int calculateOverFare2(final int distance) {
 
-        return (((distance - 1) / PHASE2_DISTANCE_UNIT) + 1) * UNIT;
+        return (((distance) / PHASE2_DISTANCE_UNIT) + 1) * UNIT;
     }
 }
