@@ -6,11 +6,13 @@ public class GetAllStationsInLineResponse {
 
     private final Long lineId;
     private final String lineName;
+    private final int extraFare;
     private final List<StationDto> stations;
 
-    public GetAllStationsInLineResponse(final Long lineId, final String lineName, final List<StationDto> stationDtos) {
+    public GetAllStationsInLineResponse(final Long lineId, final String lineName, final int extraFare, final List<StationDto> stationDtos) {
         this.lineId = lineId;
         this.lineName = lineName;
+        this.extraFare = extraFare;
         this.stations = stationDtos;
     }
 
@@ -20,6 +22,10 @@ public class GetAllStationsInLineResponse {
 
     public String getLineName() {
         return lineName;
+    }
+
+    public int getExtraFare() {
+        return extraFare;
     }
 
     public List<StationDto> getStations() {

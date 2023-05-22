@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 public class FindLineTest extends IntegrationTestSetUp {
 
     private final LineCreateRequest createRequest =
-            new LineCreateRequest("3호선", "A", "B", 10, 0);
+            new LineCreateRequest("3호선", "A", "B", 10, 1000);
 
     @DisplayName("3호선에 A-B-C 역이 있을 때 - ")
     @BeforeEach
@@ -52,6 +52,7 @@ public class FindLineTest extends IntegrationTestSetUp {
                 .statusCode(HttpStatus.OK.value())
                 .body("lineId", is(1))
                 .body("lineName", is("3호선"))
+                .body("extraFare", is(1000))
                 .body("stations[0].stationName", is("A"))
                 .body("stations[1].stationName", is("B"))
                 .body("stations[2].stationName", is("C"));
@@ -62,7 +63,7 @@ public class FindLineTest extends IntegrationTestSetUp {
     void findAllLines() {
 
         final LineCreateRequest createRequest =
-                new LineCreateRequest("1호선", "X", "Y", 10, 0);
+                new LineCreateRequest("1호선", "X", "Y", 10, 2000);
 
         // given, when
         RestAssured.given().log().all()
@@ -88,11 +89,14 @@ public class FindLineTest extends IntegrationTestSetUp {
                 .statusCode(HttpStatus.OK.value())
                 .body("lines[0].lineId", is(1))
                 .body("lines[0].lineName", is("3호선"))
+                .body("lines[0].extraFare", is(1000))
                 .body("lines[0].stations[0].stationName", is("A"))
                 .body("lines[0].stations[1].stationName", is("B"))
                 .body("lines[0].stations[2].stationName", is("C"))
+
                 .body("lines[1].lineId", is(2))
                 .body("lines[1].lineName", is("1호선"))
+                .body("lines[1].extraFare", is(2000))
                 .body("lines[1].stations[0].stationName", is("X"))
                 .body("lines[1].stations[1].stationName", is("Y"))
                 .body("lines[1].stations[2].stationName", is("Z"));

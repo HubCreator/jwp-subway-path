@@ -43,7 +43,7 @@ public class LineRepository {
         final List<Section> findSections = sectionDao.findAllByLineId(findLine.getId());
         final Sections sections = new Sections(findSections);
 
-        return Optional.of(new Line(findLine.getId(), findLine.getLineNameValue(), sections));
+        return Optional.of(new Line(findLine.getId(), findLine.getLineNameValue(), findLine.getExtraFareValue(), sections));
     }
 
     public Optional<Line> findById(final Long lineId) {
@@ -57,6 +57,7 @@ public class LineRepository {
         return allLine.stream()
                 .map(line -> new Line(
                         line.getId(), line.getLineNameValue(),
+                        line.getExtraFareValue(),
                         new Sections(new LinkedList<>(sectionDao.findAllByLineId(line.getId())))))
                 .collect(Collectors.toList());
     }

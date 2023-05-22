@@ -31,7 +31,7 @@ class SubwayGraphTest {
 
         // given
         final List<Line> lines = List.of(
-                new Line(1L, "1호선", new Sections(
+                new Line(1L, "1호선", 0, new Sections(
                         List.of(
                                 new Section(1L, A, B, new Distance(3)),
                                 new Section(2L, B, C, new Distance(4)),
@@ -40,7 +40,7 @@ class SubwayGraphTest {
 
                         )
                 )),
-                new Line(2L, "2호선", new Sections(
+                new Line(2L, "2호선", 0, new Sections(
                         List.of(
                                 new Section(5L, B, C, new Distance(3)),
                                 new Section(6L, C, D, new Distance(1)),
@@ -154,7 +154,7 @@ class SubwayGraphTest {
     class FareTest {
         // given
         final List<Line> lines = List.of(
-                new Line(1L, "1호선", new Sections(
+                new Line(1L, "1호선", 0, new Sections(
                         List.of(
                                 new Section(1L, A, B, new Distance(18)),
                                 new Section(2L, B, C, new Distance(19)),
@@ -163,7 +163,7 @@ class SubwayGraphTest {
 
                         )
                 )),
-                new Line(2L, "2호선", new Sections(
+                new Line(2L, "2호선", 0, new Sections(
                         List.of(
                                 new Section(5L, B, C, new Distance(18)),
                                 new Section(6L, C, D, new Distance(16)),

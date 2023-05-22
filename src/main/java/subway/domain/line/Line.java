@@ -20,8 +20,7 @@ public class Line {
     }
 
     public Line(final String lineName, final Integer extraFare) {
-        this.lineName = new LineName(lineName);
-        this.extraFare = new ExtraFare(extraFare);
+        this(lineName, null, extraFare);
     }
 
     public Line(final String lineName, final Sections sections, final Integer extraFare) {
@@ -31,14 +30,13 @@ public class Line {
     }
 
     public Line(final Long id, final String lineName, final Integer extraFare) {
+        this(id, lineName, extraFare, null);
+    }
+
+    public Line(final Long id, final String lineName, final Integer extraFare, final Sections sections) {
         this.id = id;
         this.lineName = new LineName(lineName);
         this.extraFare = new ExtraFare(extraFare);
-    }
-
-    public Line(final Long id, final String lineName, final Sections sections) {
-        this.id = id;
-        this.lineName = new LineName(lineName);
         this.sections = sections;
     }
 

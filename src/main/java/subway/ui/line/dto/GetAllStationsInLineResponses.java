@@ -15,7 +15,7 @@ public class GetAllStationsInLineResponses {
                     final List<StationDto> stationDtos = line.stations().stream()
                             .map(station -> new StationDto(station.getId(), station.getName()))
                             .collect(Collectors.toList());
-                    return new GetAllStationsInLineResponse(line.getId(), line.getLineNameValue(), stationDtos);
+                    return new GetAllStationsInLineResponse(line.getId(), line.getLineNameValue(), line.getExtraFareValue(), stationDtos);
                 })
                 .collect(Collectors.toList());
     }
