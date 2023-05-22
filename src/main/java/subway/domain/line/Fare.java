@@ -36,4 +36,11 @@ public class Fare {
     public int hashCode() {
         return Objects.hash(fare);
     }
+
+    @Override
+    public String toString() {
+        return "Fare{" +
+                "fare=" + fare +
+                '}';
+    }
 }
