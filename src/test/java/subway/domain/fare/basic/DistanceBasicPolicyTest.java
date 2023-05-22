@@ -11,7 +11,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class DistanceFarePolicyTest {
+class DistanceBasicPolicyTest {
 
     // given
     List<Line> lines = List.of(new Line(1L, "1호선", 0));
@@ -20,7 +20,7 @@ class DistanceFarePolicyTest {
     @Test
     void fare1() {
         // when
-        final Fare fare = new Fare(new DistanceFarePolicy(9, lines));
+        final Fare fare = new Fare(new subway.domain.fare.basic.DistanceBasicPolicy(9, lines));
 
         // then
         assertThat(fare).isEqualTo(new Fare(1250));
@@ -29,7 +29,7 @@ class DistanceFarePolicyTest {
     @Test
     void fare2() {
         // when
-        final Fare fare = new Fare(new DistanceFarePolicy(12, lines));
+        final Fare fare = new Fare(new subway.domain.fare.basic.DistanceBasicPolicy(12, lines));
 
         // then
         assertThat(fare).isEqualTo(new Fare(1350));
@@ -38,7 +38,7 @@ class DistanceFarePolicyTest {
     @Test
     void fare3() {
         // when
-        final Fare fare = new Fare(new DistanceFarePolicy(16, lines));
+        final Fare fare = new Fare(new subway.domain.fare.basic.DistanceBasicPolicy(16, lines));
 
         // then
         assertThat(fare).isEqualTo(new Fare(1450));
@@ -47,14 +47,14 @@ class DistanceFarePolicyTest {
     @Test
     void fare4() {
         // when
-        final Fare fare = new Fare(new DistanceFarePolicy(55, lines));
+        final Fare fare = new Fare(new subway.domain.fare.basic.DistanceBasicPolicy(55, lines));
 
         // then
         assertThat(fare).isEqualTo(new Fare(2150));
     }
 
     @Nested
-    public class DistanceFare {
+    public class DistanceBasicPolicy {
         // given
         List<Line> lines = List.of(
                 new Line(1L, "1호선", 1000),
@@ -70,7 +70,7 @@ class DistanceFarePolicyTest {
         })
         void fareTest(int distance, int finalFare) {
             // when
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new subway.domain.fare.basic.DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(fare).isEqualTo(new Fare(finalFare));

@@ -1,6 +1,6 @@
 package subway.domain.line;
 
-import subway.domain.fare.basic.BasicFarePolicy;
+import subway.domain.fare.basic.BasicPolicy;
 import subway.domain.fare.discount.DiscountPolicy;
 
 import java.util.Objects;
@@ -9,8 +9,8 @@ public class Fare {
 
     private final int fare;
 
-    public Fare(final BasicFarePolicy basicFarePolicy) {
-        this.fare = basicFarePolicy.calculateFare();
+    public Fare(final BasicPolicy basicPolicy) {
+        this.fare = basicPolicy.calculateFare();
     }
 
     public Fare(final int fare) {

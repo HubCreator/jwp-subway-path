@@ -1,7 +1,7 @@
 package subway.domain.fare.discount;
 
 import org.junit.jupiter.api.Test;
-import subway.domain.fare.basic.DistanceFarePolicy;
+import subway.domain.fare.basic.DistanceBasicPolicy;
 import subway.domain.line.Fare;
 import subway.domain.line.Line;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AgeGroupDiscountPolicyTest {
+class AgeGroupDiscountTest {
 
     List<Line> lines = List.of(new Line(1L, "1호선", 0));
 
@@ -17,10 +17,10 @@ class AgeGroupDiscountPolicyTest {
     @Test
     void baby() {
         // given
-        final Fare fare = new Fare(new DistanceFarePolicy(10, lines));
+        final Fare fare = new Fare(new DistanceBasicPolicy(10, lines));
 
         // when
-        final Fare discounted = fare.applyDiscount(new AgeGroupDiscountPolicy(5));
+        final Fare discounted = fare.applyDiscount(new AgeGroupDiscount(5));
 
         // then
         assertThat(discounted).isEqualTo(new Fare(0));
@@ -29,10 +29,10 @@ class AgeGroupDiscountPolicyTest {
     @Test
     void child() {
         // given
-        final Fare fare = new Fare(new DistanceFarePolicy(10, lines));
+        final Fare fare = new Fare(new DistanceBasicPolicy(10, lines));
 
         // when
-        final Fare discounted = fare.applyDiscount(new AgeGroupDiscountPolicy(6));
+        final Fare discounted = fare.applyDiscount(new AgeGroupDiscount(6));
 
         // then
         assertThat(discounted).isEqualTo(new Fare(450));
@@ -41,10 +41,10 @@ class AgeGroupDiscountPolicyTest {
     @Test
     void teen() {
         // given
-        final Fare fare = new Fare(new DistanceFarePolicy(10, lines));
+        final Fare fare = new Fare(new DistanceBasicPolicy(10, lines));
 
         // when
-        final Fare discounted = fare.applyDiscount(new AgeGroupDiscountPolicy(13));
+        final Fare discounted = fare.applyDiscount(new AgeGroupDiscount(13));
 
         // then
         assertThat(discounted).isEqualTo(new Fare(720));
@@ -53,10 +53,10 @@ class AgeGroupDiscountPolicyTest {
     @Test
     void adult() {
         // given
-        final Fare fare = new Fare(new DistanceFarePolicy(10, lines));
+        final Fare fare = new Fare(new DistanceBasicPolicy(10, lines));
 
         // when
-        final Fare discounted = fare.applyDiscount(new AgeGroupDiscountPolicy(20));
+        final Fare discounted = fare.applyDiscount(new AgeGroupDiscount(20));
 
         // then
         assertThat(discounted).isEqualTo(new Fare(1250));

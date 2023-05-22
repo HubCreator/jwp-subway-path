@@ -3,7 +3,7 @@ package subway.domain.graph;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import subway.domain.fare.basic.DistanceFarePolicy;
+import subway.domain.fare.basic.DistanceBasicPolicy;
 import subway.domain.line.Fare;
 import subway.domain.line.Line;
 import subway.domain.section.Distance;
@@ -58,7 +58,7 @@ class SubwayGraphTest {
             // when
             final int distance = graph.getShortestPathDistance(A, H);
             final List<Station> stations = graph.getShortestPath(A, H);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(12);
@@ -72,7 +72,7 @@ class SubwayGraphTest {
             // when
             final int distance = graph.getShortestPathDistance(B, D);
             final List<Station> stations = graph.getShortestPath(B, D);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(4);
@@ -86,7 +86,7 @@ class SubwayGraphTest {
             // when
             final int distance = graph.getShortestPathDistance(B, E);
             final List<Station> stations = graph.getShortestPath(B, E);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(9);
@@ -100,7 +100,7 @@ class SubwayGraphTest {
             // when
             final int distance = graph.getShortestPathDistance(C, D);
             final List<Station> stations = graph.getShortestPath(C, D);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(1);
@@ -114,7 +114,7 @@ class SubwayGraphTest {
             // when
             final int distance = graph.getShortestPathDistance(H, A);
             final List<Station> stations = graph.getShortestPath(H, A);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(12);
@@ -128,7 +128,7 @@ class SubwayGraphTest {
             // when
             final int distance = graph.getShortestPathDistance(E, B);
             final List<Station> stations = graph.getShortestPath(E, B);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(9);
@@ -142,7 +142,7 @@ class SubwayGraphTest {
             // when
             final int distance = graph.getShortestPathDistance(E, E);
             final List<Station> stations = graph.getShortestPath(E, E);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(0);
@@ -179,7 +179,7 @@ class SubwayGraphTest {
         void fare1() {
             // when
             final int distance = graph.getShortestPathDistance(A, H);
-            final Fare fare = new Fare(new DistanceFarePolicy(distance, lines));
+            final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines));
 
             // then
             assertThat(distance).isEqualTo(72);

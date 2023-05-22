@@ -52,7 +52,7 @@ public class LineController {
         final List<Station> stations = lineService.getStations(lineId);
 
         final List<StationDto> stationDtos = stations.stream()
-                .map(station -> new StationDto(station.getId(), station.getName()))
+                .map(station -> new StationDto(station.getId(), station.getStationNameValue()))
                 .collect(Collectors.toList());
         final GetAllStationsInLineResponse response = new GetAllStationsInLineResponse(line.getId(), line.getLineNameValue(), line.getExtraFareValue(), stationDtos);
 

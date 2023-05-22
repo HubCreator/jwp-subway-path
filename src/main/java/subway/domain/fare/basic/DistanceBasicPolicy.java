@@ -4,7 +4,7 @@ import subway.domain.line.Line;
 
 import java.util.List;
 
-public class DistanceFarePolicy implements BasicFarePolicy {
+public class DistanceBasicPolicy implements BasicPolicy {
 
     private static final int BASIC_FARE = 1250;
     private static final int BASIC_DISTANCE = 10;
@@ -21,7 +21,7 @@ public class DistanceFarePolicy implements BasicFarePolicy {
     private final int extraFare;
 
 
-    public DistanceFarePolicy(final int distance, final List<Line> lines) {
+    public DistanceBasicPolicy(final int distance, final List<Line> lines) {
         this.distance = distance;
         this.extraFare = lines.stream()
                 .mapToInt(Line::getExtraFareValue)

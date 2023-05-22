@@ -33,7 +33,7 @@ class StationRepositoryTest {
         // then
         assertAll(
                 () -> assertThat(saved.getId()).isNotNull(),
-                () -> assertThat(saved.getName()).isEqualTo("A")
+                () -> assertThat(saved.getStationNameValue()).isEqualTo("A")
         );
     }
 

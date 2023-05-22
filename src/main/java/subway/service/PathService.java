@@ -2,8 +2,8 @@ package subway.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import subway.domain.fare.basic.DistanceFarePolicy;
-import subway.domain.fare.discount.AgeGroupDiscountPolicy;
+import subway.domain.fare.basic.DistanceBasicPolicy;
+import subway.domain.fare.discount.AgeGroupDiscount;
 import subway.domain.graph.SubwayGraph;
 import subway.domain.line.Fare;
 import subway.domain.line.Line;
@@ -38,9 +38,8 @@ public class PathService {
         final SubwayGraph subwayGraph = SubwayGraph.from(lines);
         final int distance = subwayGraph.getShortestPathDistance(fromStation, toStation);
         final List<Station> stations = subwayGraph.getShortestPath(fromStation, toStation);
-
-        final Fare fare = new Fare(new DistanceFarePolicy(distance, lines))
-                .applyDiscount(new AgeGroupDiscountPolicy(age));
+        final Fare fare = new Fare(new DistanceBasicPolicy(distance, lines))
+                .applyDiscount(new AgeGroupDiscount(age));
 
         return new ShortestPathResponse(distance, stations, fare.getFare());
     }

@@ -2,11 +2,11 @@ package subway.domain.fare.discount;
 
 import subway.domain.line.Fare;
 
-public class AgeGroupDiscountPolicy implements DiscountPolicy {
+public class AgeGroupDiscount implements DiscountPolicy {
 
     private final AgeGroup ageGroup;
 
-    public AgeGroupDiscountPolicy(int age) {
+    public AgeGroupDiscount(int age) {
         ageGroup = AgeGroup.of(age);
     }
 

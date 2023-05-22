@@ -5,26 +5,30 @@ import java.util.Objects;
 public class Station {
 
     private Long id;
-    private String name;
+    private StationName stationName;
 
     private Station() {
     }
 
-    public Station(final String name) {
-        this.name = name;
+    public Station(final String stationName) {
+        this(null, stationName);
     }
 
-    public Station(final Long id, final String name) {
+    public Station(final Long id, final String stationName) {
         this.id = id;
-        this.name = name;
+        this.stationName = new StationName(stationName);
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public StationName getStationName() {
+        return stationName;
+    }
+
+    public String getStationNameValue() {
+        return stationName.getStationName();
     }
 
     @Override
@@ -48,7 +52,7 @@ public class Station {
     public String toString() {
         return "Station{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + stationName + '\'' +
                 '}';
     }
 }

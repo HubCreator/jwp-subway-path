@@ -13,7 +13,7 @@ public class GetAllStationsInLineResponses {
         this.lines = lines.stream()
                 .map(line -> {
                     final List<StationDto> stationDtos = line.stations().stream()
-                            .map(station -> new StationDto(station.getId(), station.getName()))
+                            .map(station -> new StationDto(station.getId(), station.getStationNameValue()))
                             .collect(Collectors.toList());
                     return new GetAllStationsInLineResponse(line.getId(), line.getLineNameValue(), line.getExtraFareValue(), stationDtos);
                 })

@@ -17,9 +17,9 @@ public class StationRepository {
     }
 
     public Station save(final Station station) {
-        final Optional<Station> stationOptional = stationDao.findByName(station.getName());
+        final Optional<Station> stationOptional = stationDao.findByName(station.getStationNameValue());
 
-        return stationOptional.orElseGet(() -> stationDao.insert(station.getName()));
+        return stationOptional.orElseGet(() -> stationDao.insert(station.getStationNameValue()));
     }
 
     public Optional<Station> findById(final Long stationId) {

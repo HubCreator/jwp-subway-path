@@ -1,6 +1,6 @@
 package subway.domain.fare.basic;
 
-public interface BasicFarePolicy {
+public interface BasicPolicy {
 
     int calculateFare();
 }
